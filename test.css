@@ -1,0 +1,30 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.filter {
+  margin-right: 100px;
+  height: 30px;
+  width: 300px;
+}
+.routine-list {
+  width: 1000px;
+  height: 1000px;
+  background-color: rgb(224, 224, 224);
+  color: rgb(0, 0, 0);
+  margin-top: 10px;
+}
+.name-div, .rep-div, .set-div, .date-div {
+  display: inline-block;
+}
+.amount {
+  display: inline-block;
+}
+.total-training {
+  margin-top: 20px;
+}
+.save-button, .rep-input, .set-input {
+  display: none;
+}
