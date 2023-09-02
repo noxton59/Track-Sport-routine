@@ -1,25 +1,123 @@
+body {
+  margin: 0;
+}
 header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  background: linear-gradient(71deg, rgba(122,194,134,1) 27%, rgba(100,122,224,1) 100%);
+}
+.header1 {
+  margin-left: 2em;
+  color: rgb(255, 255, 253);
+}
+.header2 {
+  background: linear-gradient(148deg, rgba(122,123,194,1) 52%, rgba(0,0,0,1) 100%);
+  margin: 0;
+  height: 2em;
+  padding-left: 3em;
+  display: flex;
+  align-items: center;
+  font-size: 2em;
+  color: white;
+  font-weight: bold;
+  opacity: 0.8;
 }
 .filter {
-  margin-right: 100px;
+  margin-right: 7em;
   height: 30px;
   width: 300px;
+  padding-left: 1em;
+  border-radius: 1em;
+  border: none;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+}
+.background {
+  background-image: url(hero.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+}
+.input-field {
+  background-color: rgba(34, 65, 88, 0.57);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5em;
+}
+.exercise-field, .reps-field, .sets-field, .date-field {
+  padding: 0.3em 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.name-of-exercise, .amount, .date-name {
+  display: inline-block;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.amount-of-sets, .amount-of-reps, .input-routine, .date {
+  border-radius: 1em;
+  padding-left: 0.5em;
+  margin-left: 0.5em;
+  height: 2em;
+  border: none;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+  font-size: 1em;
+  cursor: pointer;
+}
+.amount-of-sets, .amount-of-reps {
+  width: 5em;
+}
+.date {
+  margin-left: 1.5em;
+  padding: 0.1em 0.3em;
+}
+.submit-btn{
+  border-radius: 1em;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.2em 1.5em;
+  cursor: pointer;
+}
+.submit-btn:hover {
+  background-color: rgb(0, 48, 219);
+  color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
 }
 .routine-list {
-  width: 1000px;
-  height: 1000px;
-  background-color: rgb(224, 224, 224);
-  color: rgb(0, 0, 0);
+  width: 75vw;
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
   margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 1em;
+}
+.alert-message {
+  display: none;
+}
+.alert-message.is-alert {
+  display: initial;
+  background: radial-gradient(circle, rgba(94,78,78,1) 4%, rgba(224,47,47,1) 78%);
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  letter-spacing: 0.08em;
+  display: flex;
+  justify-content: center;
+  color: white;
+  height: 2em;
+  position: absolute;
+  width: 100vw;
 }
 .name-div, .rep-div, .set-div, .date-div {
-  display: inline-block;
-}
-.amount {
   display: inline-block;
 }
 .total-training {
@@ -28,3 +126,99 @@ header {
 .save-button, .rep-input, .set-input {
   display: none;
 }
+.is-updating .save-button, .is-updating .rep-input, .is-updating .set-input {
+  display: initial;
+}
+.is-updating .update-button {
+  display: none;
+}
+.delete-button {
+  margin: 0 0.4em;
+  width: 5em;
+  height: 2em;
+  border-radius: 1em;
+  background-color: rgba(206, 0, 0, 0.697);
+  color: white;
+  font-size: 0.6em;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.delete-button:hover {
+  box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.697);
+  background-color: rgb(217, 0, 0);
+}
+.delete-button:active {
+  background-color: rgb(57, 57, 57);
+  color: rgb(255, 75, 75);
+  font-weight: bold;
+}
+.update-button {
+  width: 10em;
+  height: 2em;
+  border-radius: 1em;
+  font-size: 0.6em;
+  background-color: rgb(0, 115, 214);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-left: 0.5em;
+}
+.update-button:hover {
+  box-shadow: 0px 0px 10px rgb(0, 172, 246);
+  background-color: rgb(27, 122, 255);
+}
+.update-button:active {
+  background-color: rgb(224, 224, 224);
+  color: rgb(3, 42, 158);
+  font-weight: bold;
+}
+.save-button {
+  background-color: rgba(1, 151, 1, 0.771);
+  color: white;
+  font-size: 0.6em;
+  border-radius: 1em;
+  height: 2em;
+  width: 4em;
+  margin-left: 0.2em;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.save-button:hover {
+  box-shadow: 0px 0px 10px rgba(1, 246, 1, 0.771);
+  background-color: rgb(0, 196, 0);
+}
+.save-button:active {
+  background-color: white;
+  color: rgb(0, 105, 9);
+  font-weight: bold;
+}
+.total-training {
+  color: rgb(0, 57, 114);
+  font-size: 2em;
+  font-weight: bold;
+  padding-left: 1em;
+}
+.container {
+  padding: 0.4em 0.8em;
+  display: flex;
+  align-items: center;
+}
+.name-div {
+  width: 15em;
+}
+.rep-div {
+  width: 7em;
+}
+.set-div {
+  width: 4em;
+}
+.date-div {
+  width: 7em;
+}
+.rep-input, .set-input {
+  width: 3.5em;
+  font-size: 0.7em;
+  border-radius: 0.3em;
+  margin: 0 0.2em;
+}
+

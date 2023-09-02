@@ -9,54 +9,32 @@
       <h1 class="header1">Welcome to sport zone</h1>
       <input type="text" class="filter js-filter" placeholder="Search exercise...">
     </header>
-    <h2 class="header2">Enter your daily routine:</h2>
-    <input class="input-routine js-input-routine" type="text" placeolder="Enter your exercise...">
-    <div class="amount">Amount of reps:</div>
-    <select class="js-amount-of-reps">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
-      <option value="13">13</option>
-      <option value="14">14</option>
-      <option value="15">15</option>
-      <option value="16">16</option>
-      <option value="17">17</option>
-      <option value="18">18</option>
-      <option value="19">19</option>
-      <option value="20">20</option>
-      <option value="21">21</option>
-      <option value="22">22</option>
-      <option value="23">23</option>
-      <option value="24">24</option>
-      <option value="25">25</option>
-    </select>
-    <div class="amount">Total sets:</div>
-    <select class="js-amount-of-sets">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-    </select>
-    <input type="date" class="js-date">
-    <button class="submit-btn js-submit-btn">Enter</button>
-    <div class="total-training">Total Training:</div>
-    <div class="routine-list js-routine-list">
+    <div class="background"></div>
+    <div class="header2">Enter your sport routine:</div>
+    <div class="input-field">
+      <div class="exercise-field">
+        <label for='exercise-input' class="name-of-exercise">Exercise:</label>
+        <input class="input-routine js-input-routine" type="text" placeolder="Enter your exercise..." id="exercise-input">
+      </div>
+      <div class="reps-field">
+        <label for='reps-input' class="amount">Amount of reps:</label>
+        <input class="js-amount-of-reps amount-of-reps" type="number" id="reps-input">
+      </div>
+      <div class="sets-field">
+        <label for="sets-input" class="amount">Total sets:</label>
+        <input class="js-amount-of-sets amount-of-sets" type="number" id="sets-input">
+      </div>
+      <div class="date-field">
+        <label for="date-input" class="date-name">Date:</label>
+        <input type="date" class="js-date date" id="date-input">
+      </div>
+      <button class="submit-btn js-submit-btn">Enter</button>
     </div>
+    <div class="alert-message">
+      Please fill the Exercise name, amount of Reps, total Sets and Date!
+    </div>
+    <div class="total-training">Total Training:</div>
+    <div class="routine-list js-routine-list"></div>
     <script src="test.js">    
     </script>
   </body>
