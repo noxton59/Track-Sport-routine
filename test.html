@@ -18,11 +18,11 @@
       </div>
       <div class="reps-field">
         <label for='reps-input' class="amount">Amount of reps:</label>
-        <input class="js-amount-of-reps amount-of-reps" type="number" id="reps-input">
+        <input class="js-amount-of-reps amount-of-reps" type="number/text" id="reps-input">
       </div>
       <div class="sets-field">
         <label for="sets-input" class="amount">Total sets:</label>
-        <input class="js-amount-of-sets amount-of-sets" type="number" id="sets-input">
+        <input class="js-amount-of-sets amount-of-sets" type="number" min="0" id="sets-input">
       </div>
       <div class="date-field">
         <label for="date-input" class="date-name">Date:</label>
@@ -34,6 +34,13 @@
       Please fill the Exercise name, amount of Reps, total Sets and Date!
     </div>
     <div class="total-training">Total Training:</div>
+    <div class="sort-field">
+      <div class="flex-sort-div">
+        <div class="sort-div">Sort by:</div>
+        <button class="sort-by-name-btn js-sort-by-name-btn">Name</button>
+        <button class="sort-by-date-btn js-sort-by-date-btn">Date</button>
+      </div>
+    </div>
     <div class="routine-list js-routine-list"></div>
     <script src="test.js">    
     </script>
