@@ -7,11 +7,31 @@ body {
 .header-exer {
   font-size: 2em;
   font-weight: bold;
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 .exercise-div {
   text-align: center;
 }
 .description-img {
   height: 30em;
-  
+  object-fit: contain;
+}
+a {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 0.5em;
+}
+@media (max-width: 900px) {
+  .description-img {
+    object-fit: contain;
+    width: 800px;
+  }
+}
+@media (max-width: 700px) {
+  .description-img {
+    width: 450px;
+  }
 }

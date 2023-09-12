@@ -469,4 +469,7 @@ header {
   .div-info-close-btn {
     right: 10%;
   }
+  .alert-message {
+    text-align: center;
+  }
 }
