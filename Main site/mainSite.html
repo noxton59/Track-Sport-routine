@@ -1,14 +1,25 @@
 <!doctype HTML>
 <html>
   <head>
-    <title>Test 123</title>
-    <link rel="stylesheet" href="test.css">
+    <title>Sport routine</title>
+    <link rel="stylesheet" href="mainSiteStyle.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta charset="utf-8"> 
   </head>
   <body>
-    <header>
+    <header id="main-header">
       <h1 class="header1">Welcome to sport zone</h1>
-      <input type="text" class="filter js-filter" placeholder="Search exercise...">
+      <div class="div-wrapper">
+        <div class="info-btn js-info-btn">Info</div>
+        <a class="exercise-btn js-exercise-btn" href="../Exercises description/exercises.html">Exercises</a>
+        <input type="text" class="filter js-filter" placeholder="Search exercise...">
+      </div>
     </header>
+    <a class="scroll-top js-scroll-top" href="#main-header">Top</a>
+    <div class="div-info js-div-info">
+      <div class="div-info-text">This site is meant to be your notebook of exercises, here you can track all your sport routine and change some information if mistake was made. In exercises page you may find some information about exercises.</div>
+      <button class="div-info-close-btn js-div-info-close-btn">X</button>
+    </div>
     <div class="background"></div>
     <div class="header2">Enter your sport routine:</div>
     <div class="input-field">
@@ -42,7 +53,7 @@
       </div>
     </div>
     <div class="routine-list js-routine-list"></div>
-    <script src="test.js">    
+    <script src="mainSiteScript.js">    
     </script>
   </body>
 </html>

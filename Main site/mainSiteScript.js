@@ -289,3 +289,21 @@ document.querySelector('.js-sort-by-date-btn').addEventListener('click', ()=>{
     sortedByDateBack = false;
   }
 });
+
+document.querySelector('.js-info-btn').addEventListener('click', ()=>{
+  document.querySelector('.div-info').classList.add('is-shown');
+})
+document.querySelector('.js-div-info-close-btn').addEventListener('click', ()=>{
+  document.querySelector('.div-info').classList.remove('is-shown');
+})
+
+function scrollWindow() {
+  if (document.documentElement.scrollTop > 100) {
+    document.querySelector('.js-scroll-top').style.display = "initial";
+  }
+  else {
+    document.querySelector('.js-scroll-top').style.display = "none";
+  }
+}
+
+window.onscroll = function() {scrollWindow()};

@@ -12,6 +12,57 @@ header {
   margin-left: 2em;
   color: rgb(255, 255, 253);
 }
+.scroll-top {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  background-color: rgb(0, 157, 255);
+  color: white;
+  font-size: 2em;
+  padding: 0.1em 0.4em;
+  text-decoration: none;
+  border-radius: 0.3em;
+  z-index: 2;
+  display: none;
+}
+.scroll-top:hover {
+  background-color: white;
+  color: black;
+}
+.scroll-top:active {
+  box-shadow: 0px 0px 20px rgba(88, 73, 255, 0.8);
+}
+.div-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.info-btn, .exercise-btn {
+  margin-right: 2em;
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+.info-btn:hover, .exercise-btn:hover {
+  color: rgb(0, 103, 214);
+}
+.info-btn:active {
+  color: rgb(240, 236, 0);
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
+  border-radius: 0.5em;
+  padding: 0em 0.5em;
+  margin-right: 1.5em;
+}
+.exercise-btn:active {
+  color: rgb(240, 236, 0);
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
+  border-radius: 0.5em;
+  padding: 0em 0.5em;
+  margin-right: 1.5em;
+  margin-left: -0.5em;
+}
 .header2 {
   background: linear-gradient(148deg, rgba(122,123,194,1) 52%, rgba(0,0,0,1) 100%);
   margin: 0;
@@ -32,6 +83,43 @@ header {
   border-radius: 1em;
   border: none;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+}
+.div-info {
+  display: none;
+}
+.div-info.is-shown {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  background-color: rgba(0,0,0,0.5);
+  display: initial;
+}
+.div-info-text {
+  color: rgb(232, 212, 0);
+  font-size: 2em;
+  padding: 20% 15%;
+  text-align: center;
+}
+.div-info-close-btn {
+  position: fixed;
+  top: 30%;
+  right: 15%;
+  background-color: rgb(152, 0, 0);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 1em;
+  padding: 0.1em 0.4em;
+  font-size: 1.5em;
+}
+.div-info-close-btn:hover {
+  background-color: rgb(242, 2, 2);
+}
+.div-info-close-btn:active {
+  background-color: white;
+  color: rgb(242, 2, 2);
 }
 .background {
   background-image: url(hero.jpg);
@@ -73,6 +161,9 @@ header {
   font-size: 1em;
   cursor: pointer;
 }
+.input-routine {
+  width: 15em;
+}
 .amount-of-sets, .amount-of-reps {
   width: 5em;
 }
@@ -97,7 +188,7 @@ header {
   box-shadow: 0px 0px 10px rgba(79, 255, 91, 0.8);
 }
 .routine-list {
-  width: 75vw;
+  width: 85vw;
   color: rgb(255, 255, 255);
   font-size: 1.5em;
   margin-top: 10px;
@@ -195,7 +286,7 @@ header {
   font-weight: bold;
 }
 .total-training {
-  color: rgb(0, 57, 114);
+  color: rgb(75, 161, 247);
   font-size: 2em;
   font-weight: bold;
   padding-left: 1em;
@@ -241,16 +332,16 @@ header {
   align-items: center;
 }
 .name-div {
-  width: 15em;
+  width: 16em;
 }
 .rep-div {
   width: 8em;
 }
 .set-div {
-  width: 4em;
+  width: 6em;
 }
 .date-div {
-  width: 7em;
+  width: 8em;
 }
 .rep-input, .set-input {
   width: 3.5em;
@@ -263,7 +354,7 @@ header {
 }
 .alert-message-reps-sets.empty-fields {
   position: absolute;
-  right: 6em;
+  left: 85%;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 0.3em 0.5em;
   border-radius: 0.5em;
@@ -271,3 +362,111 @@ header {
   display: initial;
 }
 
+@media (min-width: 1200px) and (max-width: 1450px) {
+  .name-div {
+    width: 15em;
+  }
+  .routine-list {
+    width: 90vw;
+  }
+  .alert-message-reps-sets.empty-fields {
+    left: 90%;
+  }
+}
+@media (min-width: 900px) and (max-width: 1199.99px) {
+  .input-field {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .input-routine {
+    width: 20em;
+  }
+  .amount-of-reps {
+    width: 15.3em;
+  }
+  .amount-of-sets {
+    width: 19.2em;
+  }
+  .date {
+    width: 10em;
+  }
+  .submit-btn {
+    width: 10em;
+  }
+  header {
+    flex-direction: column;
+  }
+  .filter {
+    width: 10em;
+    margin-right: 1em;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .name-div {
+    width: 40%;
+  }
+}
+@media (max-width: 899.99px) {
+  header {
+    flex-direction: column;
+  }
+  .filter {
+    width: 10em;
+    margin-right: 1em;
+  }
+  .input-field {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .input-routine {
+    width: 20em;
+  }
+  .amount-of-reps {
+    width: 15.3em;
+  }
+  .amount-of-sets {
+    width: 19.2em;
+  }
+  .date {
+    width: 10em;
+  }
+  .submit-btn {
+    width: 10em;
+  }
+  .sort-field {
+    margin-left: 0em;
+  }
+  .routine-list {
+    width: 100%;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 2px solid rgb(123, 158, 248);
+    border-radius: 1em;
+    margin-bottom: 0.1em;
+  }
+  .name-div {
+    width: 7em;
+  }
+  .rep-div {
+    width: 5em;
+  }
+  .set-div {
+    width: 4em;
+  }
+  .date-div {
+    width: 5em;
+  }
+  .update-button {
+    width: 5em;
+  }
+  .scroll-top {
+    right: 5px;
+  }
+  .div-info-close-btn {
+    right: 10%;
+  }
+}

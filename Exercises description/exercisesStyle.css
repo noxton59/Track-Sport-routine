@@ -1,0 +1,17 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header-exer {
+  font-size: 2em;
+  font-weight: bold;
+}
+.exercise-div {
+  text-align: center;
+}
+.description-img {
+  height: 30em;
+  
+}
