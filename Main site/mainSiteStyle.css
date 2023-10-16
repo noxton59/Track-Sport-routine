@@ -63,6 +63,20 @@ header {
   margin-right: 1.5em;
   margin-left: -0.5em;
 }
+.register-btn, .login-btn {
+  margin-right: 20px;
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+.register-btn:hover, .login-btn:hover{
+  color: rgb(255, 255, 52);
+}
+.register-btn:active, .login-btn:active{
+  color: rgb(38, 88, 251);
+}
 .header2 {
   background: linear-gradient(148deg, rgba(122,123,194,1) 52%, rgba(0,0,0,1) 100%);
   margin: 0;
@@ -122,17 +136,261 @@ header {
   background-color: white;
   color: rgb(242, 2, 2);
 }
+.reg-log-field {
+  display: flex;
+}
+.user-name-field {
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.user-name-menu {
+  display: none;
+}
+.user-name-menu.is-shown {
+  display: initial;
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  width: 180px;
+  background: linear-gradient(339deg, rgba(0,152,84,0.8464635854341737) 0%, rgba(29,29,29,0.9248949579831933) 100%);
+  z-index: 1;
+  border-radius: 10px;
+}
+.delete-account, .delete-history, .log-out {
+  padding: 10px 5px;
+  font-size: 1.3em;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  border-radius: 10px;
+}
+.delete-history {
+  padding: 0px 5px;
+}
+.delete-account:hover, .delete-history:hover, .log-out:hover {
+  background-color: rgb(240, 240, 240);
+  color: rgb(0, 39, 110);
+  font-weight: bold;
+}
+.reg-success-bg {
+  display: none;
+}
+.reg-success-bg.is-shown {
+  position: absolute;
+  display: initial;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(39, 39, 39, 0.5);
+  z-index: 1;
+  animation: fadeIn 2s;
+}
+@keyframes fadeIn {
+  0% {opacity: 1;}
+  50% {opacity: 1;}
+  100% {opacity: 0;}
+}
+.reg-success {
+  display: initial;
+  position: absolute;
+  top: 280px;
+  left: 30%;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  background: linear-gradient(180deg, rgba(39,192,255,0.8464635854341737) 0%, rgba(29,29,29,0.9248949579831933) 100%);
+  text-align: center;
+  padding: 100px 80px;
+  border-radius: 20px;
+}
 .reg-form {
+  display: none;
+}
+.reg-form.is-shown {
   position: fixed;
   top: 0px;
   left: 0px;
   width: 100%;
   height: 100%;
-  background-color: gray;
+  background-color: rgba(39, 39, 39, 0.5);
   z-index: 1;
-}
-.email-field, .first-name-field, .second-name-field {
   display: flex;
+  justify-content: center;
+}
+.enter-info {
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+.form-field-close-btn {
+  position: relative;
+  width: 25px;
+  height: 20px;
+  top: 180px;
+  right: -520px;
+  cursor: pointer;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+  color: white;
+  font-size: 1.2em;
+  background: radial-gradient(circle, rgba(0,0,0,0.6559873949579832) 79%, rgba(76,75,255,0.9248949579831933) 100%);
+  width: 550px;
+  height: 320px;
+  border-radius: 1em;
+  font-weight: bold;
+  margin-left: -10px;
+}
+.data-field {
+  display: grid;
+  grid-template-columns: 170px 300px;
+  text-align: right;
+}
+.input-label, .reg-field {
+  display: inline-block;
+  margin: 5px;
+}
+.reg-field:focus {
+  outline: none;
+}
+.reg-warning {
+  display: none;
+}
+.reg-warning.is-shown {
+  background: radial-gradient(circle, rgba(0,0,0,0.8464635854341737) 0%, rgba(241,34,34,0.9248949579831933) 100%);
+  width: 200px;
+  text-align: center;
+  border-radius: 5px;
+  position: absolute;
+  top: 370px;
+  display: initial;
+}
+.register-button {
+  margin-top: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.have-account {
+  margin-top: 10px;
+}
+.sign-in-btn {
+  display: inline-block;
+  color: rgb(111, 195, 248);
+  cursor: pointer;
+  padding: 5px;
+}
+.sign-in-btn:hover, .sign-in-btn:focus {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.944);
+  border-radius: 5px;
+  padding: 5px;
+}
+.sign-in-btn:active {
+  color: rgb(0, 21, 255);
+}
+.logged-success-field {
+  display: none;
+}
+.logged-success-field.is-shown {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(39, 39, 39, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 2s;
+}
+@keyframes fadeIn {
+  0% {opacity: 1;}
+  50% {opacity: 1}
+  100% {opacity: 0;}
+}
+.logged-success {
+  background: linear-gradient(349deg, rgba(39,255,82,0.8464635854341737) 0%, rgba(29,29,29,0.9248949579831933) 100%);
+  text-align: center;
+  padding: 120px 160px;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 20px;
+}
+.login-field {
+  display: none;
+}
+.login-field.is-shown {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(39, 39, 39, 0.5);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+.login-form-close-btn {
+  position: relative;
+  width: 30px;
+  height: 20px;
+  top: 170px;
+  right: -480px;
+  cursor: pointer;
+}
+.login-info {
+  margin: 20px;
+}
+.login-form-field {
+  display: grid;
+  grid-template-columns: 100px 300px;
+  text-align: right;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+  color: white;
+  font-size: 1.2em;
+  background: radial-gradient(circle, rgba(0,0,0,0.6559873949579832) 79%, rgba(76,75,255,0.9248949579831933) 100%);
+  width: 500px;
+  height: 250px;
+  border-radius: 1em;
+  font-weight: bold;
+}
+.login-input-label, .log-field {
+  margin: 5px;
+}
+.log-field:focus {
+  outline: none;
+}
+.login-btn-form {
+  margin-top: 20px;
+  padding: 10px 25px;
+  cursor: pointer;
+}
+.reg-form-btn {
+  color: rgb(111, 195, 248);
+  margin-top: 20px;
+  font-weight: normal;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 5px;
+}
+.reg-form-btn:hover{
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.944);
+  border-radius: 5px;
+  padding: 5px;
+}
+.reg-form-btn:active {
+  color: rgb(0, 21, 255);
 }
 .background {
   background-image: url(hero.jpg);
@@ -173,6 +431,9 @@ header {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
   font-size: 1em;
   cursor: pointer;
+}
+.amount-of-sets:focus, .amount-of-reps:focus, .input-routine:focus, .date:focus {
+  outline: none;
 }
 .input-routine {
   width: 15em;

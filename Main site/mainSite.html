@@ -12,28 +12,51 @@
       <div class="div-wrapper">
         <div class="info-btn js-info-btn">Info</div>
         <a class="exercise-btn js-exercise-btn" href="../Exercises description/exercises.html">Exercises</a>
-        <div class="register">Register</div>
-        <div class="reg-form">
-          <div>Enter your information:</div>
-          <div class="email-field">
-            <label for="email">Email:&nbsp;</label>
-            <input type="email" id="email" name="email">
-          </div>
-          <div class="first-name-field">
-            <label for="first-name">First name:&nbsp;</label>
-            <input type="text" id="first-name" name="first-name">
-          </div>
-          <div class="second-name-field">
-            <label for="second-name">Second name:&nbsp;</label>
-            <input type="text" id="second-name" name="second-name">
-          </div>
-          <div class="passwodr-field">
-            <label for="password">Password:&nbsp;</label>
-            <input type="password" id="password" name="password">
-          </div>
-          <input type="submit">
+        <div class="reg-log-field">
+          <div class="register-btn register-btn-js">Register</div>
+          <div class="login-btn">Login</div>
         </div>
-        <div class="login">Login</div>
+        <div class="reg-success-bg">
+          <div class="reg-success reg-success-js">Registration successfully completed</div>
+        </div>
+        <div class="reg-form">
+          <button class="form-field-close-btn">X</button>
+          <div class="form-field">
+            <div class="enter-info">Enter your information:</div>
+            <div class="data-field">
+              <label for="reg-login" class="input-label">Login:&nbsp;</label>
+              <input id="reg-login" name="login" class="reg-field login-field-reg-js" required>
+              <label for="first-name" class="input-label">First name:&nbsp;</label>
+              <input type="text" id="first-name" name="first-name" class="reg-field first-name-reg-js" required>
+              <label for="second-name" class="input-label">Second name:&nbsp;</label>
+              <input type="text" id="second-name" name="second-name" class="reg-field second-name-reg-js" required>
+              <label for="password" class="input-label">Password:&nbsp;</label>
+              <input type="password" id="password" name="password" class="reg-field fpassword-reg-js" required>
+              <label for="sec-password" class="input-label">Repeat password:&nbsp;</label>
+              <input type="password" id="sec-password" name="password" class="reg-field spassword-reg-js" required>
+            </div>
+            <div class="reg-warning reg-warning-js">Fill in all the fields</div>
+            <button type="submit" class="register-button register-button-js">Register</button>
+            <div class="have-account">Already have an account? <div class="sign-in-btn sign-in-btn-js">Sign in</div></div>
+          </div>
+        </div>
+        <div class="logged-success-field">
+          <div class="logged-success"></div>
+        </div>
+        <div class="login-field">
+          <button class="login-form-close-btn">X</button>
+          <div class="login-form">
+            <div class="login-info">Enter your login and password:</div>
+            <div class="login-form-field">
+              <label for="log-login" class="login-input-label">Login:&nbsp;</label>
+              <input id="log-login" name="login" class="log-field login-input-log-js" required>
+              <label for="log-password" class="login-input-label">Password:&nbsp;</label>
+              <input type="password" id="log-password" name="password" class="log-field password-input-log-js" required>
+            </div>
+            <button type="submit" class="login-btn-form login-btn-log-js">Login</button>
+            <div class="reg-form-btn reg-form-btn-js">Register</div>
+          </div>
+        </div>
       </div>
     </header>
     <a class="scroll-top js-scroll-top" href="#main-header">Top</a>
