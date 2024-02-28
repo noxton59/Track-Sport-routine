@@ -1,0 +1,23 @@
+{
+  "name": "track-sport-routine-site",
+  "version": "1.0.0",
+  "description": "Site for tracking your sport routine",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "Sport",
+    "routine",
+    "track"
+  ],
+  "author": "Anton Zhdanov",
+  "license": "MIT",
+  "dependencies": {
+    "@seald-io/nedb": "^4.0.3",
+    "express": "^4.18.2",
+    "nedb": "^1.8.0"
+  },
+  "type": "module"
+}
