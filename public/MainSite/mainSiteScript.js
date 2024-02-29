@@ -74,7 +74,6 @@ function regForm() {
   regSecPasswordInput.type = "password";
   const regWarning = document.createElement("div");
   regWarning.classList.add("reg-warning", "reg-warning-js");
-  regWarning.textContent = "Fill in all the fields!";
   const regFormSubmitBtn = document.createElement("button");
   regFormSubmitBtn.classList.add("register-button", "register-button-js");
   regFormSubmitBtn.type = "submit";
@@ -104,12 +103,20 @@ function regForm() {
     document.body.removeChild(regForm);
     loginForm();
   });
+}
 
-  document.querySelectorAll(".reg-field").forEach((field)=>{
-    field.addEventListener("focus", ()=>{
-      document.querySelector(".reg-warning").classList.remove("is-shown");
+let timeOutRegWarning;
+function regWarningShow(regWarning) {
+  regWarning.classList.add("is-shown");
+  regWarning.classList.add("fade-in");
+  if (regWarning.classList.contains("fade-in")) {
+    regWarning.classList.remove("fade-in");
+    requestAnimationFrame(()=>{
+      regWarning.classList.add("fade-in");
     })
-  })
+  }
+  clearTimeout(timeOutRegWarning);
+  timeOutRegWarning = setTimeout(()=>{regWarning.classList.remove("is-shown")}, 2900);
 }
 
 async function createUser(regForm, regWarning) {
@@ -123,20 +130,23 @@ async function createUser(regForm, regWarning) {
   let fpasswordValue = fpassword.value;
   const spassword = document.querySelector(".spassword-reg-js");
   let spasswordValue = spassword.value;
-
+  
   if (loginValue == "" || firstNameValue == "" || secondNameValue == "" || fpasswordValue == "" || spasswordValue == "") {
-    regWarning.classList.add("is-shown")
+    regWarning.textContent = "Fill all fields!";
+    regWarningShow(regWarning);
   }
   else {
     if (fpasswordValue === spasswordValue) {
        if (await checkLogin(loginValue)) {
-        alert("This login already exists")
+        regWarning.textContent = "This login already exists!";
+        regWarningShow(regWarning);
       } else {
         regWarning.classList.remove("is-shown");
         addUser(loginValue, firstNameValue, secondNameValue, spasswordValue, regForm);
       }
     } else {
-      alert("Passwords don't match")
+      regWarning.textContent = "Passwords don't match!";
+      regWarningShow(regWarning);
       return
     }
   }
@@ -153,9 +163,10 @@ async function addUser(loginValue, firstNameValue, secondNameValue, spasswordVal
   }
   const response = await fetch("/api/addUser", options);
   const responseJson = await response.json();
+
+  const regSuccessBg = document.createElement("div");
+  regSuccessBg.classList.add("reg-success-bg");
   if (responseJson === "success") {
-    const regSuccessBg = document.createElement("div");
-    regSuccessBg.classList.add("reg-success-bg");
     const regSuccess = document.createElement("div");
     regSuccess.classList.add("reg-success", "reg-success-js");
     regSuccess.textContent = "Registration successfully completed";
@@ -164,7 +175,13 @@ async function addUser(loginValue, firstNameValue, secondNameValue, spasswordVal
     document.body.append(regSuccessBg);
     setTimeout(()=>{document.body.removeChild(regSuccessBg)}, 1400);
   } else {
-    alert("Something went wrong, try again.");
+    const regGoneWrong = document.createElement("div");
+    regGoneWrong.classList.add("reg-gone-wrong");
+    regGoneWrong.textContent = `Something went wrong, try again. ${responseJson}`;
+    regSuccessBg.append(regGoneWrong);
+    document.body.removeChild(regForm);
+    document.body.append(regSuccessBg);
+    setTimeout(()=>{document.body.removeChild(regSuccessBg)}, 1400);
   }
 }
 
@@ -216,9 +233,11 @@ function loginForm () {
   const loginFormRegisterBtn = document.createElement("div");
   loginFormRegisterBtn.classList.add("reg-form-btn", "reg-form-btn-js");
   loginFormRegisterBtn.textContent = "Register";
+  const logWarning = document.createElement("div");
+  logWarning.classList.add("log-warning");
   loginFormField.append(loginLoginLabel, loginLoginInput, loginPasswordLabel, loginPasswordInput);
   rememberField.append(rememberMeLabel, rememberMeInput);
-  loginForm.append(loginFormCloseBtn, loginInfo, loginFormField, rememberField, loginFormSubmitBtn, loginFormRegisterBtn);
+  loginForm.append(loginFormCloseBtn, loginInfo, loginFormField, rememberField, loginFormSubmitBtn, loginFormRegisterBtn, logWarning);
   loginField.append(loginForm);
   document.body.append(loginField);
 
@@ -227,7 +246,7 @@ function loginForm () {
   });
 
   loginFormSubmitBtn.addEventListener("click", () => {
-    logIn(rememberMeInput, loginField);
+    logIn(rememberMeInput, loginField, logWarning);
   });
 
   loginFormRegisterBtn.addEventListener("click", () => {
@@ -235,8 +254,21 @@ function loginForm () {
     regForm();
   })
 }
-
-async function logIn(rememberMeInput, loginField) {
+//style no user, wrong pass, etc...
+let timeOutLogWarning;
+function LogWarningShow(logWarning) {
+  logWarning.classList.add("is-shown");
+  logWarning.classList.add("fade-in");
+  if (logWarning.classList.contains("fade-in")) {
+    logWarning.classList.remove("fade-in");
+    requestAnimationFrame(()=>{
+      logWarning.classList.add("fade-in");
+    })
+  }
+  clearTimeout(timeOutRegWarning);
+  timeOutRegWarning = setTimeout(()=>{logWarning.classList.remove("is-shown")}, 2900);
+}
+async function logIn(rememberMeInput, loginField, logWarning) {
   const userLoginInput = document.querySelector(".login-input-log-js");
   let userLogin = userLoginInput.value;
   const userPasswordInput = document.querySelector(".password-input-log-js");
@@ -246,14 +278,15 @@ async function logIn(rememberMeInput, loginField) {
   }
   const request = await fetch(`/api/${userLogin}&${userPassword}`, options);
   const json = await request.json();
+
   if (json === "no user") {
-    alert("User with such login doesn't exist.");
+    logWarning.textContent = "User with such login doesn't exists!";
+    LogWarningShow(logWarning);
   } else if (json[0] === "match") {
     const userFirstName = json[2];
     const userSecondName = json[3];
     loggedUser = json[1];  
     routineList = json[4];
-
     const loggedSuccessField = document.createElement("div");
     loggedSuccessField.classList.add("logged-success-field", "is-shown");
     const loggedSuccess = document.createElement("div");
@@ -273,7 +306,8 @@ async function logIn(rememberMeInput, loginField) {
       localStorage.setItem("loggedUser", JSON.stringify([loggedUser, savedPass, rememberMeBool]));
     }
   } else if (json === "wrong password") {
-    alert("Wrong password!");
+    logWarning.textContent = "Wrong password!";
+    LogWarningShow(logWarning);
   }
 }
 
@@ -301,6 +335,19 @@ async function checkLoggedUser() {
 }
 
 let isMenuVisible = false;
+let timeOutPassWarning;
+function passWarningShow(passWarning) {
+  passWarning.classList.add("is-shown");
+  passWarning.classList.add("fade-in");
+  if (logWarning.classList.contains("fade-in")) {
+    logWarning.classList.remove("fade-in");
+    requestAnimationFrame(()=>{
+      logWarning.classList.add("fade-in");
+    })
+  }
+  clearTimeout(timeOutRegWarning);
+  timeOutRegWarning = setTimeout(()=>{logWarning.classList.remove("is-shown")}, 2900);
+}
 
 function loggedUserMenu(userFirstName, userSecondName) {
   let userName;
@@ -456,12 +503,6 @@ function loggedUserMenu(userFirstName, userSecondName) {
     regLogField.removeChild(userNameField);
     regLogField.removeChild(userNameMenu);
     regLogField.append(registerBtn, loginBtn);
- /*    document.querySelector(".login-btn").addEventListener("click", ()=>{
-      document.querySelector(".login-field").classList.add("is-shown");
-    }) */
-   /*  document.querySelector(".register-btn-js").addEventListener('click', ()=>{
-      document.querySelector(".reg-form").classList.add("is-shown");
-    }) */
     const routineList = document.querySelector(".js-routine-list");
     const loginRequired = document.createElement("div");
     loginRequired.classList.add("login-required");
@@ -519,41 +560,47 @@ async function enter() {
   const uniqueId = () => {
     return Number(Math.floor(Math.random() * Date.now()));
   }
-  if (routine.value == 0 || sets.value == 0 || reps.value ==0 || date == 0) {
+  if (routine.value == 0 || sets.value == 0 || reps.value == 0 || date == 0) {
     document.querySelector('.alert-message').classList.add("is-alert");
+    setTimeout(()=>{document.querySelector(".alert-message").classList.remove("is-alert")}, 2900);
   }
   else {
-    const data = {name: routineInput, reps: repsInput, sets: setsInput, date: date, id: uniqueId()};
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    }
-    const response = await fetch(`/api/${loggedUser}`, options);
-    const responseJson = await response.json();
-    routineList = responseJson;
-    renderRoutine(routineList.sort(compareDate));
-
-    routine.value = '';
-    sets.value = "";
-    reps.value = "";
-
-    if (sortedListByDate === true && sortedByDateBack === false) {
+    if (loggedUser === "") {
+      document.querySelector(".login-alert").classList.add("show");
+      setTimeout(()=>{document.querySelector(".login-alert").classList.remove("show")}, 2900);
+    } else {
+      const data = {name: routineInput, reps: repsInput, sets: setsInput, date: date, id: uniqueId()};
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }
+      const response = await fetch(`/api/${loggedUser}`, options);
+      const responseJson = await response.json();
+      routineList = responseJson;
       renderRoutine(routineList.sort(compareDate));
+
+      routine.value = '';
+      sets.value = "";
+      reps.value = "";
+
+      if (sortedListByDate === true && sortedByDateBack === false) {
+        renderRoutine(routineList.sort(compareDate));
+      }
+      else if (sortedListByDate === true && sortedByDateBack === true) {
+        renderRoutine(routineList.sort(compareDateBack));
+      }
+      else if (sortedListByName === true && sortedByNameBack === false) {
+        renderRoutine(routineList.sort(compareNameBack));
+      }
+      else if (sortedListByName === true && sortedByNameBack === true) {
+        renderRoutine(routineList.sort(compareName));
+      }
+      
+      document.querySelector('.alert-message').classList.remove("is-alert");
     }
-    else if (sortedListByDate === true && sortedByDateBack === true) {
-      renderRoutine(routineList.sort(compareDateBack));
-    }
-    else if (sortedListByName === true && sortedByNameBack === false) {
-      renderRoutine(routineList.sort(compareNameBack));
-    }
-    else if (sortedListByName === true && sortedByNameBack === true) {
-      renderRoutine(routineList.sort(compareName));
-    }
-    
-    document.querySelector('.alert-message').classList.remove("is-alert");
   }
 }
 
