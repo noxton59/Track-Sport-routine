@@ -39,49 +39,61 @@ header {
   align-items: center;
 }
 .info-btn, .exercise-btn {
-  margin-right: 2em;
+  margin-right: 20px;
   color: rgb(255, 255, 255);
+  border: 2px solid white;
+  padding: 3px 10px;
+  border-radius: 10px;
   font-size: 1.5em;
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
 }
-.info-btn:hover, .exercise-btn:hover {
-  color: rgb(0, 103, 214);
+.info-btn:hover {
+  color: rgb(199, 234, 1);
+  border: 2px solid rgb(199, 234, 1);
 }
 .info-btn:active {
-  color: rgb(240, 236, 0);
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
-  border-radius: 0.5em;
-  padding: 0em 0.5em;
-  margin-right: 1.5em;
+  color: white;
+  background-color: rgb(199, 234, 1);
+  border: 2px solid rgb(255, 255, 255);
+}
+.exercise-btn:hover {
+  color: rgb(23, 201, 255);
+  border: 2px solid rgb(23, 201, 255);
 }
 .exercise-btn:active {
-  color: rgb(240, 236, 0);
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
-  border-radius: 0.5em;
-  padding: 0em 0.5em;
-  margin-right: 1.5em;
-  margin-left: -0.5em;
+  color: white;
+  background-color: rgb(23, 201, 255);
+  border: 2px solid white;
 }
 .register-btn, .login-btn {
   margin-right: 20px;
   color: rgb(255, 255, 255);
+  border: 2px solid white;
+  padding: 3px 10px;
+  border-radius: 10px;
   font-size: 1.5em;
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
 }
-.register-btn:hover, .login-btn:hover{
+.register-btn:hover {
   color: rgb(255, 255, 52);
+  border: 2px solid rgb(255, 255, 52);
 }
-.register-btn:active, .login-btn:active{
-  color: rgb(38, 88, 251);
-  border-radius: 0.5em;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
-  padding: 0px 10px;
-  margin-right: 10px;
-  margin-left: -10px;
+.register-btn:active {
+  color: rgb(159, 159, 159);
+  border: 2px solid rgb(159, 159, 159);
+  background-color: rgb(255, 255, 52);
+}
+.login-btn:hover {
+  color: rgb(43, 255, 43);
+}
+.login-btn:active {
+  color: rgb(159, 159, 159);
+  border: 2px solid rgb(159, 159, 159);
+  background-color: rgb(43, 255, 43);
 }
 
 .header2 {
@@ -157,10 +169,21 @@ header {
 }
 .user-name-field {
   color: white;
+  border: 2px solid white;
+  padding: 3px 10px;
+  border-radius: 10px;
   font-size: 1.5em;
   font-weight: bold;
   margin-right: 10px;
   cursor: pointer;
+}
+.user-name-field:hover {
+  color: white;
+  border: 2px solid white;
+  background-color: rgb(18, 125, 255);
+}
+.user-name-field:active {
+  background-color: rgb(119, 180, 255);
 }
 .user-name-menu {
   display: none;
@@ -175,17 +198,51 @@ header {
   z-index: 2;
   border-radius: 10px;
 }
-.delete-account, .delete-history, .log-out, .change-pass {
+.delete-account, .delete-history, .log-out, .change-pass, .change-name {
+  position: relative;
   padding: 10px 5px;
   font-size: 1.3em;
   color: rgb(255, 255, 255);
   cursor: pointer;
   border-radius: 10px;
 }
-.delete-account:hover, .delete-history:hover, .log-out:hover, .change-pass:hover {
+.delete-account:hover, .delete-history:hover, .log-out:hover, .change-pass:hover, .change-name:hover {
   background-color: rgb(240, 240, 240);
   color: rgb(0, 39, 110);
   font-weight: bold;
+}
+.delete-account:active, .delete-history:active, .log-out:active, .change-pass:active, .change-name:active {
+  color: white;
+  background-color: rgba(32, 110, 255, 0.429);
+}
+.confirm-del-acc-wrapper, .confirm-del-history-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 100px;
+  border-radius: 20px;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.confirm-del-acc, .confirm-del-history {
+  margin-bottom: 40px;
+  font-size: 25px;
+  font-weight: 500;
+  color: white;
+}
+.confirm-del-acc-btn-wrapper, .confirm-del-his-btn-wrapper {
+  display: flex;
+  gap: 30px;
+}
+.del-account-success, .del-his-success {
+  text-align: center;
+  padding: 100px 120px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  background: linear-gradient(9deg, rgba(150,150,150,1) 0%, rgba(105,0,0,1) 100%);
 }
 .reg-success-bg {
   position: absolute;
@@ -303,6 +360,9 @@ header {
 }
 .fade-in {
   animation: fadeIn 3s;
+}
+.fade-in-2s {
+  animation: fadeIn 2s;
 }
 .register-button {
   margin-top: 30px;
@@ -715,7 +775,18 @@ header {
 .alert-message-reps-sets.empty-fields {
   position: absolute;
   left: 105%;
-  width: 100px;
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0.3em 0.5em;
+  border-radius: 0.5em;
+  color: rgb(240, 81, 81);
+  display: initial;
+}
+.alert-message-reps-sets.busy-fields {
+  position: absolute;
+  left: 39%;
+  /* width: 100%; */
+  white-space: nowrap;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 0.3em 0.5em;
   border-radius: 0.5em;
@@ -734,31 +805,84 @@ header {
   justify-content: center;
   align-items: center;
 }
-.change-pass-field {
-  position: absolute;
+.change-pass-field, .change-name-field{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   border-radius: 10px;
-  top: 200px;
   width: 400px;
-  height: 180px;
+  height: 220px;
   background-color: rgba(0, 0, 0, 0.7);
 }
-.passes-field {
+.change-name-field {
+  height: 190px;
+}
+.passes-field, .names-field {
   display: grid;
-  grid-template-columns: 45% 55%;
+  grid-template-columns: 50% 50%;
   row-gap: 10px;
   margin: 20px 5%;
   text-align: right;
 }
-.passes-field label {
+.names-field {
+  width: 80%;
+  grid-template-columns: 35% 65%;
+}
+.passes-field label, .names-field label {
   color: white;
   margin-right: 10px;
 }
-.buttons-field {
+.names-warning {
+  display: none;
+}
+.names-warning.is-shown {
+  background: radial-gradient(circle, rgba(0,0,0,0.8464635854341737) 0%, rgba(241,34,34,0.9248949579831933) 100%);
+  color: white;
+  font-weight: 500;
+  font-size: 20px;
+  padding: 2px 15px;
+  text-align: center;
+  border-radius: 5px;
+  position: absolute;
+  top: 105px;
+  display: initial;
+}
+.pass-warning {
+  display: none;
+}
+.pass-warning.is-shown {
+  background: radial-gradient(circle, rgba(0,0,0,0.8464635854341737) 0%, rgba(241,34,34,0.9248949579831933) 100%);
+  color: white;
+  font-weight: 500;
+  font-size: 20px;
+  padding: 2px 15px;
+  text-align: center;
+  border-radius: 5px;
+  position: absolute;
+  top: 135px;
+  display: initial;
+}
+.pass-changed-success, .names-change-success {
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  background: linear-gradient(180deg, rgba(39,192,255,0.8464635854341737) 0%, rgba(29,29,29,0.9248949579831933) 100%);
+  text-align: center;
+  padding: 100px 80px;
+  border-radius: 20px;
+}
+.buttons-field, .names-button-field {
+  margin-top: 35px;
   display: flex;
   justify-content: center;
   column-gap: 20px;
 }
-.submit-btn-change-pass {
+.names-button-field {
+  margin-top: 25px;
+}
+.submit-btn-change-pass, .submit-btn-name-change, .confirm-del-acc-btn, .confirm-del-his-btn {
   background-color: rgba(27, 107, 255, 0.729);
   border-radius: 5px;
   padding: 5px 10px;
@@ -766,17 +890,20 @@ header {
   cursor: pointer;
   color: white;
   font-weight: bold;
-
 }
-.submit-btn-change-pass:hover, .submit-btn-change-pass:focus {
+.confirm-del-acc-btn, .confirm-del-his-btn {
+  padding: 10px 20px;
+  font-size: 20px;
+}
+.submit-btn-change-pass:hover, .submit-btn-change-pass:focus, .submit-btn-name-change:hover, .submit-btn-name-change:focus, .confirm-del-acc-btn:hover, .confirm-del-acc-btn:focus, .confirm-del-his-btn:hover, .confirm-del-his-btn:focus {
   background-color: rgb(0, 162, 255);
   box-shadow: 0px 0px 10px rgba(0, 77, 255, 0.8)
 }
-.submit-btn-change-pass:active {
+.submit-btn-change-pass:active, .submit-btn-name-change:active, .confirm-del-acc-btn:active, .confirm-del-his-btn:active {
   background-color: white;
   color: rgb(0, 132, 255);
 }
-.cancel-btn-change-pass {
+.cancel-btn-change-pass, .cancel-btn-name-change, .cancel-del-acc-btn, .cancel-del-his-btn {
   background-color: rgba(238, 59, 59, 0.844);
   color: white;
   padding: 5px 10px;
@@ -785,11 +912,15 @@ header {
   cursor: pointer;
   font-weight: bold;
 }
-.cancel-btn-change-pass:hover, .cancel-btn-change-pass:focus {
+.cancel-del-acc-btn, .cancel-del-his-btn {
+  padding: 10px 20px;
+  font-size: 20px;
+}
+.cancel-btn-change-pass:hover, .cancel-btn-change-pass:focus, .cancel-btn-name-change:hover, .cancel-btn-name-change:focus, .cancel-del-acc-btn:hover, .cancel-del-acc-btn:focus, .cancel-del-his-btn:hover, .cancel-del-his-btn:focus {
   background-color: rgb(248, 0, 0);
   box-shadow: 0px 0px 10px rgba(252, 27, 27, 0.8);
 }
-.cancel-btn-change-pass:active {
+.cancel-btn-change-pass:active, .cancel-btn-change-name:active, .cancel-del-acc-btn:active, .cancel-del-his-btn:active {
   background-color: white;
   color: red;
 }
@@ -995,6 +1126,11 @@ header {
     cursor: pointer;
     font-weight: bold;
   }
+  .sort-by-name-btn:hover, .sort-by-date-btn:hover {
+    box-shadow: 0px 0px 10px rgba(1, 26, 254, 0.7);
+    font-weight: bold;
+    padding: 0.3em 1.5em;
+  }
   .reg-form {
     position: absolute;
     top: 0px;
@@ -1141,7 +1277,20 @@ header {
   .alert-message-reps-sets.empty-fields {
     position: absolute;
     top: -110px;
-    left: 70%;
+    left: 60%;
+    width: 100px;
+    display: initial;
+  }
+  .alert-message-reps-sets.busy-fields {
+    position: absolute;
+    left: 105%;
+    top: -110px;
+    width: 100px;
+    white-space: wrap;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 0.3em 0.5em;
+    border-radius: 0.5em;
+    color: rgb(240, 81, 81);
     display: initial;
   }
   .delete-button {

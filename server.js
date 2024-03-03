@@ -57,6 +57,13 @@ app.put("/api/:user/:id", async (request, response) => {
 
 })
 
+app.put("/api/changeName/:login/:names", async (request, response) => {
+  const login = request.params.login;
+  const names = request.params.names.split("&");
+  await dataBase.updateAsync({login: login}, {$set: {firstName: names[0], secondName: names[1]}});
+  response.json("name changed");
+})
+
 app.put("/api/changePass/:loginPass/:newPass", async (request, response) => {
   const inputData = request.params.loginPass.split("&");
   const newPass = request.params.newPass;

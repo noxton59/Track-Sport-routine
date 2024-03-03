@@ -105,18 +105,18 @@ function regForm() {
   });
 }
 
-let timeOutRegWarning;
-function regWarningShow(regWarning) {
-  regWarning.classList.add("is-shown");
-  regWarning.classList.add("fade-in");
-  if (regWarning.classList.contains("fade-in")) {
-    regWarning.classList.remove("fade-in");
+let timeOutWarning;
+function warningShow(warning) {
+  warning.classList.add("is-shown");
+  warning.classList.add("fade-in");
+  if (warning.classList.contains("fade-in")) {
+    warning.classList.remove("fade-in");
     requestAnimationFrame(()=>{
-      regWarning.classList.add("fade-in");
+      warning.classList.add("fade-in");
     })
   }
-  clearTimeout(timeOutRegWarning);
-  timeOutRegWarning = setTimeout(()=>{regWarning.classList.remove("is-shown")}, 2900);
+  clearTimeout(timeOutWarning);
+  timeOutWarning = setTimeout(()=>{warning.classList.remove("is-shown")}, 2900);
 }
 
 async function createUser(regForm, regWarning) {
@@ -133,20 +133,20 @@ async function createUser(regForm, regWarning) {
   
   if (loginValue == "" || firstNameValue == "" || secondNameValue == "" || fpasswordValue == "" || spasswordValue == "") {
     regWarning.textContent = "Fill all fields!";
-    regWarningShow(regWarning);
+    warningShow(regWarning);
   }
   else {
     if (fpasswordValue === spasswordValue) {
        if (await checkLogin(loginValue)) {
         regWarning.textContent = "This login already exists!";
-        regWarningShow(regWarning);
+        warningShow(regWarning);
       } else {
         regWarning.classList.remove("is-shown");
         addUser(loginValue, firstNameValue, secondNameValue, spasswordValue, regForm);
       }
     } else {
       regWarning.textContent = "Passwords don't match!";
-      regWarningShow(regWarning);
+      warningShow(regWarning);
       return
     }
   }
@@ -255,19 +255,6 @@ function loginForm () {
   })
 }
 //style no user, wrong pass, etc...
-let timeOutLogWarning;
-function LogWarningShow(logWarning) {
-  logWarning.classList.add("is-shown");
-  logWarning.classList.add("fade-in");
-  if (logWarning.classList.contains("fade-in")) {
-    logWarning.classList.remove("fade-in");
-    requestAnimationFrame(()=>{
-      logWarning.classList.add("fade-in");
-    })
-  }
-  clearTimeout(timeOutRegWarning);
-  timeOutRegWarning = setTimeout(()=>{logWarning.classList.remove("is-shown")}, 2900);
-}
 async function logIn(rememberMeInput, loginField, logWarning) {
   const userLoginInput = document.querySelector(".login-input-log-js");
   let userLogin = userLoginInput.value;
@@ -281,7 +268,7 @@ async function logIn(rememberMeInput, loginField, logWarning) {
 
   if (json === "no user") {
     logWarning.textContent = "User with such login doesn't exists!";
-    LogWarningShow(logWarning);
+    warningShow(logWarning);
   } else if (json[0] === "match") {
     const userFirstName = json[2];
     const userSecondName = json[3];
@@ -307,7 +294,7 @@ async function logIn(rememberMeInput, loginField, logWarning) {
     }
   } else if (json === "wrong password") {
     logWarning.textContent = "Wrong password!";
-    LogWarningShow(logWarning);
+    warningShow(logWarning);
   }
 }
 
@@ -335,19 +322,6 @@ async function checkLoggedUser() {
 }
 
 let isMenuVisible = false;
-let timeOutPassWarning;
-function passWarningShow(passWarning) {
-  passWarning.classList.add("is-shown");
-  passWarning.classList.add("fade-in");
-  if (logWarning.classList.contains("fade-in")) {
-    logWarning.classList.remove("fade-in");
-    requestAnimationFrame(()=>{
-      logWarning.classList.add("fade-in");
-    })
-  }
-  clearTimeout(timeOutRegWarning);
-  timeOutRegWarning = setTimeout(()=>{logWarning.classList.remove("is-shown")}, 2900);
-}
 
 function loggedUserMenu(userFirstName, userSecondName) {
   let userName;
@@ -364,11 +338,14 @@ function loggedUserMenu(userFirstName, userSecondName) {
   userNameField.classList.add("user-name-field");
   const userNameMenu = document.createElement("div");
   userNameMenu.classList.add("user-name-menu");
+  const changeName = document.createElement("div");
+  changeName.classList.add("change-name");
+  changeName.textContent = "Change name";
   const changePass = document.createElement("div");
   changePass.textContent = "Change password";
   changePass.classList.add("change-pass");
   const deleteAccount = document.createElement("div");
-  deleteAccount.classList.add("delete-account", "delete-account-js");
+  deleteAccount.classList.add("delete-account");
   deleteAccount.textContent = "Delete Account";
   const deleteHistory = document.createElement("div");
   deleteHistory.classList.add("delete-history", "delete-history-js");
@@ -376,14 +353,86 @@ function loggedUserMenu(userFirstName, userSecondName) {
   const logOut = document.createElement("div");
   logOut.classList.add("log-out", "log-out-js");
   logOut.textContent = "Log out";
-  userNameMenu.append(changePass, deleteAccount, deleteHistory, logOut);
+  userNameMenu.append(changeName, changePass, deleteAccount, deleteHistory, logOut);
   regLogField.append(userNameField, userNameMenu);
   regLogField.removeChild(registerBtn);
   regLogField.removeChild(loginBtn);
+  const parentPassField = document.createElement("div");
+  parentPassField.classList.add("parent-pass-field");
+
+  document.querySelector(".change-name").addEventListener("click", async () => {
+    const changeNameField = document.createElement("div");
+    changeNameField.classList.add("change-name-field");
+    const namesField = document.createElement("div");
+    namesField.classList.add("names-field");
+    const namesButtonField = document.createElement("div");
+    namesButtonField.classList.add("names-button-field");
+    const firstNameInput = document.createElement("input");
+    firstNameInput.id = "first-name-input";
+    firstNameInput.type = "text";
+    const firstNameLabel = document.createElement("label");
+    firstNameLabel.htmlFor = "first-name-input";
+    firstNameLabel.textContent = "First Name";
+    const secondNameInput = document.createElement("input");
+    secondNameInput.id = "second-name-input";
+    secondNameInput.type = "text";
+    const secondNameLabel = document.createElement("label");
+    secondNameLabel.htmlFor = "second-name-input";
+    secondNameLabel.textContent = "Second Name";
+    namesField.append(firstNameLabel, firstNameInput, secondNameLabel, secondNameInput);
+    const submitBtnNameChange = document.createElement("button");
+    submitBtnNameChange.classList.add("submit-btn-name-change");
+    submitBtnNameChange.textContent = "Change Name";
+    const cancelBtnChangeName = document.createElement("button");
+    cancelBtnChangeName.classList.add("cancel-btn-name-change");
+    cancelBtnChangeName.textContent = "Cancel";
+    const namesWarning = document.createElement("div");
+    namesWarning.classList.add("names-warning");
+    const namesChangeSuccess = document.createElement("div");
+    namesChangeSuccess.classList.add("names-change-success");
+    namesChangeSuccess.textContent = "Name successfully changed.";
+    namesButtonField.append(submitBtnNameChange, cancelBtnChangeName);
+    changeNameField.append(namesField, namesButtonField, namesWarning);
+    parentPassField.append(changeNameField);
+    document.body.append(parentPassField);
+
+    submitBtnNameChange.addEventListener("click", async ()=>{
+      const firstName = firstNameInput.value;
+      const secondName = secondNameInput.value;
+      if (firstName == "" || secondName == "") {
+        namesWarning.textContent = "Fill all fields!";
+        warningShow(namesWarning);
+      } else {
+        const option = {
+          method: "PUT"
+        };
+        const request = await fetch(`/api/changeName/${loggedUser}/${firstName}&${secondName}`, option);
+        const json = await request.json();
+        if (json === "name changed") {
+          if (firstName.length > 12 || secondName.length > 12) {
+            userName = `${firstName.slice(0, 12)}... ${secondName.slice(0, 12)}...`;
+          } else {
+            userName = `${firstName} ${secondName}`;
+          }
+          userNameField.textContent = userName;
+          parentPassField.removeChild(changeNameField);
+          parentPassField.append(namesChangeSuccess);
+          parentPassField.classList.add("fade-in-2s");
+          setTimeout(()=>{
+            parentPassField.removeChild(namesChangeSuccess);
+            document.body.removeChild(parentPassField);
+            parentPassField.classList.remove("fade-in-2s");
+          }, 1900);
+        }
+      }
+    })
+    cancelBtnChangeName.addEventListener("click", ()=>{
+      parentPassField.removeChild(changeNameField);
+      document.body.removeChild(parentPassField);
+    })
+  })
 
   document.querySelector(".change-pass").addEventListener("click", async () => {
-    const parentPassField = document.createElement("div");
-    parentPassField.classList.add("parent-pass-field");
     const changePassField = document.createElement("div");
     changePassField.classList.add("change-pass-field");
     const passesField = document.createElement("div");
@@ -415,8 +464,13 @@ function loggedUserMenu(userFirstName, userSecondName) {
     const cancelBtn = document.createElement("button");
     cancelBtn.classList.add("cancel-btn-change-pass");
     cancelBtn.textContent = "Cancel";
+    const passWarning = document.createElement("div");
+    passWarning.classList.add("pass-warning");
+    const passChangedSuccess = document.createElement("div");
+    passChangedSuccess.classList.add("pass-changed-success");
+    passChangedSuccess.textContent = "Password successfully changed";
     buttonsField.append(submitBtn, cancelBtn);
-    changePassField.append(passesField, buttonsField);
+    changePassField.append(passesField, buttonsField, passWarning);
     parentPassField.append(changePassField);
     document.body.append(parentPassField);
 
@@ -425,7 +479,8 @@ function loggedUserMenu(userFirstName, userSecondName) {
       const newPassValue = newPass.value;
       const newPassRepValue = newPassRep.value;
       if (prevPassValue == "" || newPassValue == "") {
-        alert("Fill the password fields");
+        passWarning.textContent = "Fill all passwords fields!";
+        warningShow(passWarning);
       } else {
         if (newPassValue === newPassRepValue) {
           const option = {
@@ -434,56 +489,116 @@ function loggedUserMenu(userFirstName, userSecondName) {
           const request = await fetch(`/api/changePass/${loggedUser}&${prevPassValue}/${newPassValue}`, option);
           const json = await request.json();
           if (json === "password changed") {
-            alert("Password successfully changed");
-            document.body.removeChild(parentPassField);
+            parentPassField.removeChild(changePassField);
+            parentPassField.append(passChangedSuccess);
+            parentPassField.classList.add("fade-in-2s");
+            setTimeout(()=>{
+              parentPassField.removeChild(passChangedSuccess);
+              document.body.removeChild(parentPassField); 
+              parentPassField.classList.remove("fade-in-2s");
+            }, 1900);
             if (rememberMeBool) {
               savedPass = newPassValue;
               localStorage.setItem("loggedUser", JSON.stringify([loggedUser, savedPass, rememberMeBool]));
             }
           } else if (json === "prevPass doesn't match") {
-            alert("Previous password doesn't match!");
+            passWarning.textContent = "Previous password doesn't match!";
+            warningShow(passWarning);
           }
         } else {
-          alert("Fields: New password and Repeat new password don't match!")
+          passWarning.textContent = "New passwords don't match!";
+          warningShow(passWarning);
         }
       }
-      
-      
     })
     cancelBtn.addEventListener("click", () => {
+      parentPassField.removeChild(changePassField);
       document.body.removeChild(parentPassField);
     })
   })
 
-  document.querySelector(".delete-account-js").addEventListener("click", async ()=>{
-    if (confirm("Are You sure? When you delete your account, your entire training history is deleted and cannot be restored.")) {
+  document.querySelector(".delete-account").addEventListener("click", async ()=>{
+    const confirmDelAccWrapper = document.createElement("div");
+    confirmDelAccWrapper.classList.add("confirm-del-acc-wrapper");
+    const confirmDelAcc = document.createElement("div");
+    confirmDelAcc.classList.add("confirm-del-acc");
+    confirmDelAcc.textContent = "Confirm? Restore your account will be impossible.";
+    const confirmDelAccBntWrapper = document.createElement("div");
+    confirmDelAccBntWrapper.classList.add("confirm-del-acc-btn-wrapper");
+    const confirmDelAccBtn = document.createElement("button");
+    confirmDelAccBtn.classList.add("confirm-del-acc-btn");
+    confirmDelAccBtn.textContent = "Confirm";
+    const cancelDelAccBtn = document.createElement("button");
+    cancelDelAccBtn.classList.add("cancel-del-acc-btn");
+    cancelDelAccBtn.textContent = "Cancel";
+    confirmDelAccBntWrapper.append(confirmDelAccBtn, cancelDelAccBtn);
+    confirmDelAccWrapper.append(confirmDelAcc, confirmDelAccBntWrapper);
+    parentPassField.append(confirmDelAccWrapper);
+    document.body.append(parentPassField);
+    const delAccSuccess = document.createElement("div");
+    delAccSuccess.classList.add("del-account-success");
+    delAccSuccess.textContent = "Account was deleted.";
+    
+    confirmDelAccBtn.addEventListener("click", async () => {
       const api_url = `/api/${loggedUser}`;
       const options = {
         method: "DELETE"
       };
       const response = await fetch(api_url, options);
-      const json = await response.json();
       loggedUser = "";
       savedPass = "";
       localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
-      regLogField.append(userNameField, userNameMenu);
       isMenuVisible = false;
       rememberMeBool = false;
       regLogField.removeChild(userNameField);
       regLogField.removeChild(userNameMenu);
       regLogField.append(registerBtn, loginBtn);
-      
+      parentPassField.removeChild(confirmDelAccWrapper);
+      parentPassField.append(delAccSuccess);
+      parentPassField.classList.add("fade-in-2s");
+      setTimeout(()=>{
+        parentPassField.removeChild(delAccSuccess);
+        parentPassField.classList.remove("fade-in-2s");
+        document.body.removeChild(parentPassField);
+      }, 1900);
+    
       const routineListHTML = document.querySelector(".js-routine-list");
       const loginRequired = document.createElement("div");
       loginRequired.classList.add("login-required");
       loginRequired.textContent = "Login first to track sport history.";
       routineListHTML.innerHTML = "";
       routineListHTML.append(loginRequired);
-    }
+    })
+
+    cancelDelAccBtn.addEventListener("click", ()=>{
+      parentPassField.removeChild(confirmDelAccWrapper);
+      document.body.removeChild(parentPassField);
+    })
   })
 
   document.querySelector(".delete-history-js").addEventListener("click", async ()=>{
-    if (confirm("Are You sure? Your entire training history will be deleted and cannot be restored.")) {
+    const confirmDelHistoryWrapper = document.createElement("div");
+    confirmDelHistoryWrapper.classList.add("confirm-del-history-wrapper");
+    const confirmDelHistory = document.createElement("div");
+    confirmDelHistory.classList.add("confirm-del-history");
+    confirmDelHistory.textContent = "Confirm? Restore your sport history will be impossible.";
+    const confirmDelHisBntWrapper = document.createElement("div");
+    confirmDelHisBntWrapper.classList.add("confirm-del-his-btn-wrapper");
+    const confirmDelHisBtn = document.createElement("button");
+    confirmDelHisBtn.classList.add("confirm-del-his-btn");
+    confirmDelHisBtn.textContent = "Confirm";
+    const cancelDelHisBtn = document.createElement("button");
+    cancelDelHisBtn.classList.add("cancel-del-his-btn");
+    cancelDelHisBtn.textContent = "Cancel";
+    confirmDelHisBntWrapper.append(confirmDelHisBtn, cancelDelHisBtn);
+    confirmDelHistoryWrapper.append(confirmDelHistory, confirmDelHisBntWrapper);
+    parentPassField.append(confirmDelHistoryWrapper);
+    document.body.append(parentPassField);
+    const delHisSuccess = document.createElement("div");
+    delHisSuccess.classList.add("del-his-success");
+    delHisSuccess.textContent = "Sport history was deleted.";
+
+    confirmDelHisBtn.addEventListener("click", async ()=>{
       const options = {
         method: "DELETE"
       }
@@ -491,9 +606,22 @@ function loggedUserMenu(userFirstName, userSecondName) {
       const json = await request.json();
       routineList = json;
       renderRoutine(routineList);
-      document.querySelector(".user-name-menu").classList.remove("is-shown");
-    }
+      parentPassField.removeChild(confirmDelHistoryWrapper);
+      parentPassField.append(delHisSuccess);
+      parentPassField.classList.add("fade-in-2s");
+      setTimeout(()=>{
+        parentPassField.removeChild(delHisSuccess);
+        parentPassField.classList.remove("fade-in-2s");
+        document.body.removeChild(parentPassField);
+      }, 1900);
+    })
+
+    cancelDelHisBtn.addEventListener("click", ()=>{
+      parentPassField.removeChild(confirmDelHistoryWrapper);
+      document.body.removeChild(parentPassField);
+    })
   })
+
   document.querySelector(".log-out-js").addEventListener("click", ()=>{
     loggedUser = "";
     savedPass = "";
@@ -650,9 +778,8 @@ function renderRoutine(sortedRoutine) {
     saveBtn.textContent = "Save";
     const alertMsg = document.createElement("div");
     alertMsg.classList.add("alert-message-reps-sets", `js-alert-message-reps-sets-${id}`);
-    alertMsg.textContent = "Enter reps and sets";
     buttonWrap.append(deleteBtn, updateBtn, repInput, setInput, saveBtn, alertMsg)
-    container.append(nameDiv, repDiv, setDiv, dateDiv, buttonWrap /* deleteBtn, updateBtn, repInput, setInput, saveBtn, alertMsg */);
+    container.append(nameDiv, repDiv, setDiv, dateDiv, buttonWrap);
     interimHTML.append(container);
   })
   if (routineList=="") {
@@ -677,7 +804,10 @@ function renderRoutine(sortedRoutine) {
   })
 
   document.querySelectorAll(".js-update-button").forEach((button)=>{
+    let timeOutWarningUpdAlert;
     button.addEventListener('click', ()=>{
+      const updateButtonId = button.dataset.updateId;
+      const alertField = document.querySelector(`.js-alert-message-reps-sets-${updateButtonId}`);
       const elements = document.querySelectorAll(".container");
       let busy = false;
       for (i=0; i<elements.length; i++) {
@@ -686,24 +816,54 @@ function renderRoutine(sortedRoutine) {
         }
       }
       if (busy) {
-        alert("Finish updating previous element first!");
+        alertField.textContent = "Update previous element first!";
+        alertField.classList.add('busy-fields');
+        alertField.classList.add("fade-in");
+        if (alertField.classList.contains("fade-in")) {
+          alertField.classList.remove("fade-in");
+          requestAnimationFrame(()=>{
+            alertField.classList.add("fade-in");
+          })
+        }
+        clearTimeout(timeOutWarningUpdAlert);
+        timeOutWarningUpdAlert = setTimeout(()=>{
+          alertField.textContent = "";
+          alertField.classList.remove('busy-fields');
+          alertField.classList.remove("fade-in");
+        }, 2900);
       } else {
-        document.querySelector(`.js-container-${button.dataset.updateId}`).classList.add("is-updating");
+        document.querySelector(`.js-container-${updateButtonId}`).classList.add("is-updating");
       }
     })
   })
 
   document.querySelectorAll(".js-save-button").forEach((button)=>{
+    let timeOutWarningUpdAlert;
     button.addEventListener('click', async ()=>{
       const saveButtonId = button.dataset.saveId;
+      const alertField = document.querySelector(`.js-alert-message-reps-sets-${saveButtonId}`);
       let newSets = Number(document.querySelector(`.js-input-set-${button.dataset.saveId}`).value);
       let newReps = document.querySelector(`.js-input-rep-${button.dataset.saveId}`).value;
       if (newSets == 0 || newReps == 0) {
-        document.querySelector(`.js-alert-message-reps-sets-${saveButtonId}`).classList.add('empty-fields');
+        alertField.textContent = "Enter reps and sets!";
+        alertField.classList.add('empty-fields');
+        alertField.classList.add("fade-in");
+        if (alertField.classList.contains("fade-in")) {
+          alertField.classList.remove("fade-in");
+          requestAnimationFrame(()=>{
+            alertField.classList.add("fade-in");
+          })
+        };
+        clearTimeout(timeOutWarningUpdAlert);
+        timeOutWarningUpdAlert = setTimeout(()=>{
+          alertField.textContent = "";
+          alertField.classList.remove('empty-fields');
+          alertField.classList.remove("fade-in");
+        }, 2900);
       }
       else {
         document.querySelector(`.js-container-${button.dataset.saveId}`).classList.remove("is-updating");
-        document.querySelector(`.js-alert-message-reps-sets-${saveButtonId}`).classList.remove('empty-fields');
+        alertField.classList.remove('empty-fields');
         const newData = {newSets, newReps};
         const options = {
           method: "PUT",
@@ -712,7 +872,6 @@ function renderRoutine(sortedRoutine) {
           },
           body: JSON.stringify(newData)
         };
-        //solve this
         const request = await fetch(`/api/${loggedUser}/${saveButtonId}`, options)
         const json = await request.json();
         routineList = json;
@@ -857,6 +1016,3 @@ function scrollWindow() {
 }
 
 window.onscroll = function() {scrollWindow()};
-
-
-
