@@ -143,13 +143,3 @@ app.delete("/api/:user/:id", async (request, response)=>{
     }
   });
 })
-
-/* app.get("/weather/:latitudelongitude", async (request, response)=>{
-  const latLon = request.params.latitudelongitude.split(",");
-  const latitude = latLon[0];
-  const longitude = latLon[1];
-  const api_url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid={0321cfaf373ca866740de092ac86624b}`;
-  const fetch_response = await fetch(api_url);
-  const json = await fetch_response.json();
-  response.json(json);
-}) */

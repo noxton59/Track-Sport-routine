@@ -526,8 +526,8 @@ header {
 .reg-form-btn:active {
   color: rgb(0, 21, 255);
 }
-.background {
-  background-image: url(hero.jpg);
+.background-field {
+  background-image: url(images/hero.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   position: fixed;
